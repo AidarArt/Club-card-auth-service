@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-refresh-tokens
+      author: a.artamonov
+      changes:
+        - createTable:
+            tableName: refresh_tokens
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: token
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiry_date
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: club_member_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_club_member_id_to_member_id
+                    referencedTableName: club_members
+                    referencedColumnNames: id
+                    nullable: false
+                    deleteCascade: true

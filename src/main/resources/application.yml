@@ -1,0 +1,24 @@
+server:
+  port: ${SERVER.PORT}
+spring:
+  application:
+    name: club-card-auth-service
+  datasource:
+    url: ${DATASOURCE.URL}
+    username: ${DATASOURCE.USERNAME}
+    password: ${DATASOURCE.PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yml
+springdoc:
+  swagger-ui:
+    url: openapi/auth-service-specification.yml
+security:
+  jwt:
+    secret-key: ${SECRET_KEY}
+    expiration-time: ${EXPIRATION_TIME}
+    expiration-time-refresh: ${EXPIRATION_TIME_REFRESH}

@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-blacklist-tokens
+      author: a.artamonov
+      changes:
+        - createTable:
+            tableName: blacklist_tokens
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: token
+                  type: varchar(255)

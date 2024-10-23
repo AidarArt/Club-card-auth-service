@@ -1,0 +1,8 @@
+openapi: 3.0.0
+info:
+  title: Club card application. AUTHENTICATION service
+  description: Сервис предоставляет функции регистрации и авторизации пользователей в системе для получения доступа к сервисам приложения и получения актуальной информации
+  version: 0.0.1-SNAPSHOT
+tags:
+  - name: ClubMember
+paths:

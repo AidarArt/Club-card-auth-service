@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-club-members
+      author: a.artamonov
+      changes:
+        - createTable:
+            tableName: club_members
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birthday
+                  type: date
+              - column:
+                  name: phone
+                  type: varchar(20)
+              - column:
+                  name: privilege
+                  type: text
+              - column:
+                  name: is_locked
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(20)
+              - column:
+                  name: template
+                  type: varchar(255)

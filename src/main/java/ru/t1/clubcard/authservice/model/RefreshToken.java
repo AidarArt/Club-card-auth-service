@@ -29,6 +29,6 @@ public class RefreshToken {
     private String token;
     private LocalDateTime expiryDate;
     @ManyToOne
-    @JoinColumn(name = "club_member_id", referencedColumnName = "id")
+    @JoinColumn(name = "club_member_email", referencedColumnName = "email")
     private ClubMember clubMember;
 }

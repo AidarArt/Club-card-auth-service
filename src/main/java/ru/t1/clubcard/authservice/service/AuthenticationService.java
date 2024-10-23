@@ -21,8 +21,8 @@ public class AuthenticationService {
     private final ClubMemberService clubMemberService;
     private final JwtService jwtService;
     private final RefreshTokenService refreshTokenService;
-    private PasswordEncoder passwordEncoder;
-    private AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
 
     public ClubMemberRegisterResponse register(ClubMemberRegisterRequest request) {

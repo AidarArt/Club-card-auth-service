@@ -23,11 +23,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: club_member_email
-                  type: varchar(255)
+                  name: club_member_id
+                  type: bigint
                   constraints:
-                    foreignKeyName: fk_club_member_email_to_member_email
+                    foreignKeyName: fk_club_member_id
                     referencedTableName: club_members
-                    referencedColumnNames: email
+                    referencedColumnNames: id
                     nullable: false
                     deleteCascade: true

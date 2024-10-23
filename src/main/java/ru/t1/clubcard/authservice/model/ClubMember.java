@@ -38,10 +38,13 @@ public class ClubMember implements UserDetails {
     private String lastName;
     private LocalDate birthday;
     private String phone;
-    private String privilege;
-    private Boolean isLocked;
+    @Builder.Default
+    private String privilege = "basic";
+    @Builder.Default
+    private Boolean isLocked = false;
     @Enumerated(EnumType.STRING)
-    private ClubMemberRole role;
+    @Builder.Default
+    private ClubMemberRole role = ClubMemberRole.ROLE_USER;
     private String template;
 
     @Override

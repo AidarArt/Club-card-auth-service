@@ -45,17 +45,14 @@ databaseChangeLog:
               - column:
                   name: privilege
                   type: text
-                  defaultValue: basic
               - column:
                   name: is_locked
                   type: boolean
-                  defaultValueBoolean: false
                   constraints:
                     nullable: false
               - column:
                   name: role
                   type: varchar(20)
-                  defaultValue: ROLE_USER
               - column:
                   name: template
                   type: varchar(255)

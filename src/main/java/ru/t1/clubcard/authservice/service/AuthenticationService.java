@@ -59,8 +59,7 @@ public class AuthenticationService {
 
         refreshTokenService.verifyExpiration(token);
 
-        UserDetails clubMember = clubMemberService
-                .userDetailsService()
+        UserDetails clubMember = clubMemberService.userDetailsService()
                 .loadUserByUsername(token.getClubMember().getEmail());
 
         refreshTokenService.delete(token);

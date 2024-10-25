@@ -70,18 +70,18 @@ jacocoTestReport {
         xml.required = true
         csv.required = false
     }
-//     afterEvaluate {
-//         classDirectories.setFrom(files(classDirectories.files.collect {
-//             fileTree(dir: it, exclude: [
-//                 "ru/t1/clubcard/authservice/util/**",
-//                 "ru/t1/clubcard/authservice/repository/**",
-//                 "ru/t1/clubcard/authservice/exception/**",
-//                 "ru/t1/clubcard/authservice/config/**",
-//                 "ru/t1/clubcard/authservice/mapper/**",
-//                 "ru/t1/clubcard/authservice/controller/RoleAdminController.class",
-//                 "ru/t1/clubcard/authservice/controller/RoleSuperAdminController.class",
-//                 "ru/t1/clubcard/authservice/controller/RoleUserController.class"
-//             ])
-//         }))
-//     }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                "ru/t1/clubcard/authservice/configuration/**",
+                "ru/t1/clubcard/authservice/repository/**",
+                "ru/t1/clubcard/authservice/exception/**",
+                "ru/t1/clubcard/authservice/mapper/**",
+                "ru/t1/clubcard/authservice/dto/**",
+                "ru/t1/clubcard/authservice/enums/**",
+                "ru/t1/clubcard/authservice/model/**",
+                "ru/t1/clubcard/authservice/ClubCardAuthServiceApplication.class"
+            ])
+        }))
+    }
 }

@@ -1,0 +1,116 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tables-for-tests
+      author: a.artamonov
+      changes:
+        - createTable:
+            tableName: club_members
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birthday
+                  type: date
+              - column:
+                  name: phone
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: privilege
+                  type: text
+              - column:
+                  name: is_locked
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(20)
+              - column:
+                  name: template
+                  type: varchar(255)
+        - createTable:
+            tableName: refresh_tokens
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: token
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: expiry_date
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false
+              - column:
+                  name: club_member_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_club_member_id
+                    referencedTableName: club_members
+                    referencedColumnNames: id
+                    nullable: false
+                    deleteCascade: true
+        - createTable:
+            tableName: blacklist_tokens
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: token
+                  type: varchar(255)
+        - createTable:
+            tableName: template_privileges
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: template
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: privilege
+                  type: text

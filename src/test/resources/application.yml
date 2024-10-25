@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    show-sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-test.yml
+security:
+  jwt:
+    secret-key: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855
+    expiration-time: 1000
+    expiration-time-refresh: 1500

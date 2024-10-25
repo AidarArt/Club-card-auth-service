@@ -4,5 +4,210 @@ info:
   description: Сервис предоставляет функции регистрации и авторизации пользователей в системе для получения доступа к сервисам приложения и получения актуальной информации
   version: 0.0.1-SNAPSHOT
 tags:
-  - name: ClubMember
+  - name: auth-service
 paths:
+  /api/v1/club-card/auth-service/register:
+    post:
+      summary: Эндпоинт предназначен для регистрации пользователей в системе
+      operationId: register
+      tags:
+        - auth-service
+      requestBody:
+        $ref: "#/components/requestBodies/ClubMemberRegisterRequest"
+      responses:
+        '201':
+          description: Пользователь успешно зарегистрирован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClubMemberRegisterResponse"
+        '409':
+          description: Пользователь с введеными данными уже существует
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /api/v1/club-card/auth-service/login:
+    post:
+      summary: Эндпоинт предназначен для авторизации пользователей в системе
+      operationId: login
+      tags:
+        - auth-service
+      requestBody:
+        $ref: "#/components/requestBodies/ClubMemberLoginRequest"
+      responses:
+        '201':
+          description: Пользователь успешно авторизован
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClubMemberLoginResponse"
+        '403':
+          description: Неверно введены данные для авторизации
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+  /api/v1/club-card/auth-service/refresh-token:
+    post:
+      summary: Эндпоинт предназначен для обновления токена авторизации с помощью токена обновления
+      operationId: refreshToken
+      tags:
+        - auth-service
+      requestBody:
+        $ref: "#/components/requestBodies/RefreshTokenRequest"
+      responses:
+        '201':
+          description: Токен успешно обновлен
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClubMemberLoginResponse"
+        '403':
+          description: Неверно введены данные для обновления токена или время жизни токена истекло
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+        '500':
+          description: Внутренняя ошибка сервера
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorMessage"
+components:
+  schemas:
+    ErrorMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Описание ошибки
+    ClubMemberRegisterResponse:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 123
+        email:
+          type: string
+          example: some@email.ru
+        password:
+          type: string
+          example: password
+        firstName:
+          type: string
+          example: Иван
+        lastName:
+          type: string
+          example: Иванов
+        birthday:
+          type: string
+          format: date
+          example: 1999-01-01
+        phone:
+          type: string
+          example: +79999999999
+        privilege:
+          type: string
+          example: basic
+        isLocked:
+          type: boolean
+          example: false
+        role:
+          type: string
+          enum:
+            - ROLE_USER
+            - ROLE_ADMIN
+            - ROLE_SUPER_ADMIN
+    ClubMemberLoginResponse:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          example: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5ydSIsImlhdCI6MTcyOTYwMzAxMSwiZXhwIjoxNzI5NjA2NjExfQ.zRPl03LW2v2wxLpmlB99KPxHg2NE9nPWVTr7LnK3Ziw
+        refreshToken:
+          type: string
+          example: 5939870b-a7ef-4e9e-9270-2adfa1b2dd96
+  requestBodies:
+    ClubMemberRegisterRequest:
+      description: Данные для регистрации пользователя
+      required: true
+      content:
+        application/json:
+          schema:
+            required:
+              - email
+              - password
+              - firstName
+              - lastName
+              - phone
+            properties:
+              email:
+                type: string
+                minLength: 6
+                maxLength: 255
+                example: some@email.ru
+              password:
+                type: string
+                minLength: 8
+                maxLength: 255
+                example: password
+              firstName:
+                type: string
+                pattern: ^[a-zA-Z][a-zA-Zа-яА-Я\\d-_]{1,20}$
+                example: Иван
+              lastName:
+                type: string
+                pattern: ^[a-zA-Z][a-zA-Zа-яА-Я\\d-_]{1,20}$
+                example: Иванов
+              phone:
+                type: string
+                pattern: ^((\\+7|7|8)+(\\d){10})$
+                example: +79999999999
+    ClubMemberLoginRequest:
+      description: Данные для авторизации пользователя
+      required: true
+      content:
+        application/json:
+          schema:
+            required:
+              - email
+              - password
+            properties:
+              email:
+                type: string
+                minLength: 6
+                maxLength: 255
+                example: some@email.ru
+              password:
+                type: string
+                minLength: 8
+                maxLength: 255
+                example: password
+    RefreshTokenRequest:
+      description: Данные для авторизации пользователя
+      required: true
+      content:
+        application/json:
+          schema:
+            required:
+              - token
+            properties:
+              token:
+                type: string
+                minLength: 36
+                maxLength: 36
+                example: 5939870b-a7ef-4e9e-9270-2adfa1b2dd96

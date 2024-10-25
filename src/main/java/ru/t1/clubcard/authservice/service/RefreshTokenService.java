@@ -45,7 +45,7 @@ public class RefreshTokenService {
 
     public RefreshToken verifyExpiration(RefreshToken refreshToken) {
         if (refreshToken.getExpiryDate().isBefore(LocalDateTime.now())) {
-            refreshTokenRepository.delete(refreshToken);
+            delete(refreshToken);
             throw new RefreshTokenExpirationException();
         }
         return refreshToken;

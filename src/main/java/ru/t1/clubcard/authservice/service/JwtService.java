@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import ru.t1.clubcard.authservice.model.BlacklistToken;
 
 import java.security.Key;
 import java.util.Date;

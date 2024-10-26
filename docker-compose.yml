@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    image: 'docker-spring-boot-postgres:latest'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SERVER_PORT=YOUR_SERVER_PORT
+      - DATASOURCE_USERNAME=YOUR_DATASOURCE_USERNAME
+      - DATASOURCE_PASSWORD=YOUR_DATASOURCE_PASSWORD
+      - DATASOURCE_URL=jdbc:postgresql://db:5432/club-service
+      - SECRET_KEY=YOUR_SECRET_KEY
+      - EXPIRATION_TIME=YOUR_EXPIRATION_TIME
+      - EXPIRATION_TIME_REFRESH=YOUR_EXPIRATION_TIME_REFRESH
+    ports:
+      - "8080:8080"
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      - POSTGRES_USER=YOUR_POSTGRES_USER
+      - POSTGRES_PASSWORD=YOUR_POSTGRES_PASSWORD
+      - POSTGRES_DB=club-service
+    ports:
+      - "5432:5432"
